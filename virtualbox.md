@@ -1,8 +1,8 @@
 
 
 ### Downloads
-[Downloads – Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-[Download Ubuntu](https://ubuntu.com/download/desktop)
+* [Downloads – Oracle VM VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+* [Download Ubuntu](https://ubuntu.com/download/desktop)
 
 ### Install Virtual Box
 Allocate 4gigs (4096 MBs) of ram
