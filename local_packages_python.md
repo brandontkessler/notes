@@ -6,7 +6,6 @@ Use the PYTHONPATH environment variable and set it equal to the path to your pac
 * Search for “env”
 * Click ‘Edit the system environment variables’
 * Click ‘Environment Variables’
-[image:B371BC1C-B057-497F-9B7B-29071D19F828-852-0004A291BF4AA128/1*q9Pye1QBufDLMQxkiYvt8w.png]
 * Under ‘User variables’ click ‘New’
 * Variable name is equal to ‘PYTHONPATH’ and variable value is equal to path of packages, for example:
 	* ‘C:\Users\username\Desktop\example\pkgs’
