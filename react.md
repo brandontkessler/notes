@@ -10,6 +10,6 @@ We can add react and jsx to an html file by adding it's cdn in the head:
 </head>
 ```
 
-* The react cdns are [here]("https://reactjs.org/docs/cdn-links.html")
-* The babel cdn are [here]("https://cdnjs.com/libraries/babel-standalone")
+* The react cdns are [here](https://reactjs.org/docs/cdn-links.html)
+* The babel cdn are [here](https://cdnjs.com/libraries/babel-standalone)
 
