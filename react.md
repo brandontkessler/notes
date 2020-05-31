@@ -246,3 +246,38 @@ class Ingredients extends Component {
 
 Helps with catching bugs as this works only in development and doesn't do anything in production.
 
+**props.children**:
+
+A collection of children inside the component.
+
+```js
+class Row extends Component {
+  render() {
+    return(
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+      }}>
+        {this.props.children}
+      </div>
+    )
+  }
+}
+```
+
+Now, we can wrap the Row component around any html tag:
+
+```js
+function App() {
+  return (
+    <Row>
+      <p>dog</p>
+      <div>Lonzo</div>
+      <h1>Javi</h1>
+    </Row>
+  )
+}
+```
+
+In this case, this.props.children refers to the p, div, and h1 tags.
