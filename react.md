@@ -223,7 +223,7 @@ export default Recipe;
 
 * staticDefault props allow us to set the default values
 
-**PropTypes**:
+#### Prop Types
 
 Type checker for props, only works in development.
 
@@ -246,7 +246,7 @@ class Ingredients extends Component {
 
 Helps with catching bugs as this works only in development and doesn't do anything in production.
 
-**props.children**:
+#### Prop Children
 
 A collection of children inside the component.
 
@@ -281,3 +281,122 @@ function App() {
 ```
 
 In this case, this.props.children refers to the p, div, and h1 tags.
+
+##### Looping over Children
+
+Children can be looped over with React.Children.map and React.Children.forEach.
+
+```js
+class IgnoreFirstChild extends Component {
+  render() {
+    return (
+      <div>
+        {React.Children.map(children, (child, i) => {
+          if (i < 1) return
+          return child
+        })}
+      </div>
+    )
+  }
+}
+```
+
+Then, `<IgnoreFirstChild />` component maps all children and ignores the first:
+
+```js
+<IgnoreFirstChild>
+  <h1>First</h1>
+  <h2>Second</h2>
+  {() => <h2>Third</h2>}
+</IgnoreFirstChild>
+```
+
+This is better than just doing this.props.children.map because it can handle things like if the child was a function like the third child above.
+
+##### Counting Children
+
+This can be done with React.Children.count(this.props.children). This is better than this.props.children.length because it can handle differences in type like functions, strings, etc.
+
+##### Converting children to array
+
+Can be done with React.Children.toArray(this.props.children). Useful for things like sorting.
+
+```js
+class Sort extends Component {
+  render() {
+    const children = React.Children.toArray(this.props.children)
+    return <p>{children.sort().join(" ")}</p>
+  }
+}
+```
+
+##### Enforcing only a Single Child
+
+```js
+class Executioner extends Component {
+  render() {
+    func = React.Children.only(this.props.children)
+    return func()
+  }
+}
+```
+
+The above returns the ONLY child in this.props.children and will break if there are more than one. The child is a function and then we return the execution of that function above.
+
+##### Changing Children Props
+
+Using an example of a RadioGroup with RadioButtons as children like:
+
+```js
+render() {
+  return (
+    <RadioGroup>
+      <RadioButton value="first">first</RadioButton>
+      <RadioButton value="second">second</RadioButton>
+      <RadioButton value="third">third</RadioButton>
+    </RadioGroup>
+  )
+}
+```
+
+We want to provide a name property to each radio button so that they all have the name "g1" as a property.
+
+We can do this by adding a method to the parent group called "renderChildren()" and call that in the return statement. We map over each child, clone the element, then update its properties with an object.
+
+```js
+class RadioGroup extends Component {
+  renderChildren() {
+    return React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {
+        name: this.props.name
+      })
+    })
+  }
+
+  render() {
+    return (
+      <div className="group">
+        // {this.props.children} <- not needed anymore
+        {this.renderChildren()}
+      </div>
+    )
+  }
+}
+```
+
+Then we can pass the property, name, from the parent to its children.
+
+```js
+render() {
+  return (
+    <RadioGroup name="g1">
+      <RadioButton value="first">first</RadioButton>
+      <RadioButton value="second">second</RadioButton>
+      <RadioButton value="third">third</RadioButton>
+    </RadioGroup>
+  )
+}
+```
+
+### State
+
