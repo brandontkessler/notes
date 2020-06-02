@@ -168,10 +168,10 @@ function App() {
       instructions="Mix ingredients"
     />
     <Recipe
-      title="pasta"
-      ingredients={["flour", "water", "sauce"]}
-      img="spaghetti.jpg" // this file should be placed in public folder
-      instructions="Mix ingredients"
+      title="lasagna"
+      ingredients={["broccoli", "water", "sauce", "noodles]}
+      img="noddle.jpg" // this file should be placed in public folder
+      instructions="Bake"
     />
   )
 }
@@ -223,7 +223,7 @@ export default Recipe;
 
 * staticDefault props allow us to set the default values
 
-#### Prop Types
+### Prop Types
 
 Type checker for props, only works in development.
 
@@ -246,7 +246,7 @@ class Ingredients extends Component {
 
 Helps with catching bugs as this works only in development and doesn't do anything in production.
 
-#### Prop Children
+### Prop Children
 
 A collection of children inside the component.
 
@@ -282,7 +282,7 @@ function App() {
 
 In this case, this.props.children refers to the p, div, and h1 tags.
 
-##### Looping over Children
+#### Looping over Children
 
 Children can be looped over with React.Children.map and React.Children.forEach.
 
@@ -313,11 +313,11 @@ Then, `<IgnoreFirstChild />` component maps all children and ignores the first:
 
 This is better than just doing this.props.children.map because it can handle things like if the child was a function like the third child above.
 
-##### Counting Children
+#### Counting Children
 
 This can be done with React.Children.count(this.props.children). This is better than this.props.children.length because it can handle differences in type like functions, strings, etc.
 
-##### Converting children to array
+#### Converting children to array
 
 Can be done with React.Children.toArray(this.props.children). Useful for things like sorting.
 
@@ -399,4 +399,111 @@ render() {
 ```
 
 ### State
+
+Date in application that can change where props cannot.
+
+Example:
+
+```js
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { favColor: 'red' }
+
+    setTimeout(() => {
+      this.setState({favColor: 'blue'})
+    }, 3000);
+  }
+
+  render(){
+    return (
+      <div>
+        My favorite color:
+        {this.state.favColor}
+      </div>
+    )
+  }
+}
+```
+
+The constructor and super(props) portion is boilerplate for all react.
+
+Never modify state directly. Always call setState to make any change.
+
+* State is always passed from a parent down to a child component as a prop.
+* State should not be passed to a sibling or a parent.
+
+Bad practice: Never duplicate state. Never assign a prop to state.
+
+```js
+class Item extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: this.props.name,
+      hobbies: this.props.hobbies
+    }
+  }
+}
+
+// This is bad!
+```
+
+#### Stateless Functional Components
+
+Can be used when there is no state passed down.
+
+```js
+import React from 'react';
+
+const Greeting = props => (
+  <h1>Hello, {props.name}</h1>
+)
+
+export default Greeting;
+```
+
+No component is used so is not imported from react. Instead, just a stateless function is used.
+
+It's good practice and provides some performance benefits to using a stateless function instead of a class when there is no state required.
+
+### Thinking in React
+
+[article](https://reactjs.org/docs/thinking-in-react.html)
+
+#### Step 1: Break the UI into componenet Heirarchy
+
+Start by drawing boxes around every component and subcomponent and give them names (can be done on pen and paper) and place them in a heirarchy. This may look like:
+
+* FilterableProductTable
+  * SearchBar
+  * ProductTable
+    * ProductCategoryRow
+    * ProductRow
+
+#### Step 2: Build a static version in react
+
+Build it with seed data that matches the data model from the API.
+
+Build components that reuse other components and pass data using props. Don't use state at all to build static version as state is reserved for interactivity.
+
+The component at the top of the hierarchy will take the data model as a prop.
+
+#### Step 3: Identify the Minimal (but Complete) Representation of UI State
+
+For example, when building a todo list, don't keep a separate state variable that counts the length of the list, instead take the length of the todo items array.
+
+Three questions to determine state:
+
+1. Is it passed in from a parent via props? If so, not state.
+2. Does it remain unchanged over time? If so, not state.
+3. Can you compute it based on any other state or props in your component? If so, not state.
+
+Then, identify which component mutates, or owns, the state. For each piece of state:
+
+* Identify every component that renders something based on that state.
+* Find a common owner component (a single component above all others).
+* Either the common owner or another higher up in the hierarchy should own the state.
+* If none make sense, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
+
 
