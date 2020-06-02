@@ -506,4 +506,42 @@ Then, identify which component mutates, or owns, the state. For each piece of st
 * Either the common owner or another higher up in the hierarchy should own the state.
 * If none make sense, create a new component solely for holding the state and add it somewhere in the hierarchy above the common owner component.
 
+### Virtual DOM
 
+A data structure stored by React that tracks changes from one render state to the next.
+
+If something has changed from one render to the next, the browser's DOM is updated (reconciliation).
+
+### Events
+
+#### onClick
+
+```javascript
+class ClickExample extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: 'tim' };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    this.setState((prevState, props) => ({
+      name: prevState.name.toUpperCase()
+    }))
+  }
+
+  render() {
+    return (
+      <div>
+        <p>{this.state.name}</p>
+        <button type="button"
+                onClick={this.handleClick}>
+          UPPERCASE
+        </button>
+      </div>
+    )
+  }
+}
+```
+
+When using methods, `this` has to be bound to it in the constructor function. When using inline functions that are arrow functions, binding `this` isn't necessary.
