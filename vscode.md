@@ -11,7 +11,7 @@
 
 * Code Runner
 * vscode-icons
-* Dracula Official
+* Tokyo Night
 * markdownlint
 * Markdown All in One
 
