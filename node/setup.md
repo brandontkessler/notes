@@ -12,3 +12,16 @@ Update the package.json file to include scripts:
 	}
 }
 ```
+
+## Structure
+
+root/
+  api/
+    handlers/
+    middleware/
+    models/
+    routes/
+  app.js
+  nodemon.json
+  package.json
+  
