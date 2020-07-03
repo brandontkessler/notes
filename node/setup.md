@@ -17,7 +17,7 @@ Update the package.json file to include scripts:
 
 root/
   api/
-    handlers/
+    controllers/
     middleware/
     models/
     routes/
