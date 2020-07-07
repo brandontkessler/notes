@@ -77,7 +77,7 @@ module.exports = mongoose.model("User", userSchema);
 
 ### Controller Usage
 
-Using the model created above, we can then use it in our controllers.
+Using the model created above, we can then use it in our controllers for signup and signin.
 
 ```js
 const User = require('../models/user');
@@ -108,6 +108,35 @@ exports.signup = async function(req, res, next) {
     })
   }
 }
+
+exports.signin = async function(req, res, next) {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    const { id, username, password, profileImageUrl } = user;
+    const isMatch = await user.comparePassword(req.body.password)
+
+    if(isMatch) {
+      let token = jwt.sign(
+        {
+          id,
+          username,
+          profileImageUrl
+        },
+        process.env.SECRET_KEY
+      );
+      return res.status(200).json({
+        id,
+        username,
+        profileImageUrl,
+        token
+      });
+    } else {
+      return next({status: 400, message: 'Auth failed'})
+    }
+  } catch(e) {
+    return next({status: 400, message: 'Auth failed'})
+  }
+}
 ```
 
 ### Router Usage
@@ -120,7 +149,7 @@ const router = express.Router();
 const { signup, signin } = require("../handlers/auth");
 
 router.post("/signup", signup)
-router.post("/signing", signin)
+router.post("/signin", signin)
 
 module.exports = router;
 
