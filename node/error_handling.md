@@ -1,6 +1,6 @@
 # Error Handling
 
-In api/handlers/errors.js
+In api/controllers/errors.js
 
 ```js
 const notFound = (req, res, next) => {
@@ -26,7 +26,7 @@ module.exports = {
 Then in app.js, add at the end of other route calls:
 
 ```js
-const errors = require('./handlers/errors');
+const errors = require('./api/controllers/errors');
 
 // Other Routes here:
 

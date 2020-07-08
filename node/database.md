@@ -2,9 +2,37 @@
 
 ## MongoDB
 
+### Development
+
+For development, use a local mongo database [reference](https://zellwk.com/blog/install-mongodb/):
+
+```bash
+> brew tap mongodb/brew
+> brew install mongodb-community
+>
+> brew services run mongodb-community # starts database
+> brew services stop mongodb-community
+```
+
+These are the basic commands to install via homebrew and to start and stop the mongo service. Enter the shell and create a new database to use then connect that database in development:
+
+```bash
+> mongo # enter shell
+> use fake_db # create and switch to a db called fake_db
+> exit # close the shell
+```
+
+The url to use with this for mongoose is (27017 is the default port for mongo):
+
+```js
+const url = 'mongodb://127.0.0.1:27017/fake_db'
+```
+
+### Production
+
 Use mongo cloud atlas and create a free cluster. Under the Network Access tab, go to IP Whitelist, click add IP Address, click Add Current IP Address, and click confirm. Then go back to the cluster, click connect and connect your application to get the URL for any driver/version available, in this case, Node.js 3.6 or later. Add the url to environment vars to be used in app.
 
-### Connection
+### Connection (app.js)
 
 In app.js connect to the database. Adding the routes that are used in the below example as well:
 
@@ -22,7 +50,7 @@ mongoose.connect(process.env.DB_URL, {
 app.use("/api/auth", authRoutes);
 ```
 
-### Models
+### Models (/api/models/user.js)
 
 Auth example using a pre hook and a method (it also has a reference to a 'Message' model and stores a vector of IDs that are associated to each message this particular use writes):
 
@@ -58,30 +86,24 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre("save", async function(next) {
   try {
-    if (!this.isModified("password")) {
-      return next()
-    }
+    if (!this.isModified("password")) return next()
     let hashed = await bcrypt.hash(this.password, 10);
     this.password = hashed
     return next();
-  } catch(err) {
-    return next(err);
-  }
+  } catch(err) { return next(err) }
 })
 
-userSchema.methods.comparePassword = async (candidatePassword, next) => {
+userSchema.methods.comparePassword = async function (enteredPassword, next) {
   try {
-    let isMatch = await bcrypt.compare(candidatePassword, this.password);
+    const isMatch = await bcrypt.compare(enteredPassword, this.password);
     return isMatch;
-  } catch (error) {
-    return next(error)
-  }
+  } catch (error) { return next(error) }
 }
 
 module.exports = mongoose.model("User", userSchema);
 ```
 
-### Controller Usage
+### Controller Usage (/api/controllers/auth.js)
 
 Using the model created above, we can then use it in our controllers for signup and signin.
 
@@ -145,14 +167,14 @@ exports.signin = async function(req, res, next) {
 }
 ```
 
-### Router Usage
+### Router (/api/router/auth.js)
 
 Then we just need to use them as routes.
 
 ```js
 const express = require("express");
 const router = express.Router();
-const { signup, signin } = require("../handlers/auth");
+const { signup, signin } = require("../controllers/auth");
 
 router.post("/signup", signup)
 router.post("/signin", signin)

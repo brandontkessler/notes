@@ -25,3 +25,19 @@ root/
   nodemon.json
   package.json
   
+## App.js
+
+```js
+const express = require('express');
+const app = express();
+const morgan = require('morgan');
+
+const port = process.env.PORT;
+
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
+
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
+})
+```
