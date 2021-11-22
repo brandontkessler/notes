@@ -12,6 +12,12 @@
 > ssh-keygen -t rsa
 ```
 
+More specifically:
+
+```bash
+> ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_servername
+```
+
 * The default file name and path is `~/.ssh/id_rsa` and corresponding public key `~/.ssh/id_rsa.pub`
 
 #### 2. Copy public key to remote server

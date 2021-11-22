@@ -43,28 +43,9 @@
 
 ## Connect to Linux Server
 
-* Open terminal
-* Generate a new private/public key pair
-	* `$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_servername`
-	* ex. `$ ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_optimus`
-	* this generates a keypair saved in ~/.ssh
-* Upload public key to server that connects to the private key
-	* `$ ssh-copy-id -f -i ~/.ssh/id_rsa_servername.pub username@ip_address`
-	* ex. `$ ssh-copy-id -f -i ~/.ssh/id_rsa_optimus.pub brandonkessler@100.96.185.40`
-* Access server with:
-	* ``ssh -i ~/.ssh/id_rsa_servername username@IP``
-	* This won’t require a password to login
-* Go to extensions and search “remote development”
-* Install the Remote Development extension which will install a few extensions including Remote - SSH
-* Open command pallet (cmd + p)
-	* type `> remote-ssh con` and select “Remote-SSH Connect to Host…”
-	* Select “+ Add New SSH Host…”
-	* Add the command to ssh using rsa keys:
-		* `ssh -i ~/.ssh/id_rsa_servername username@IP`
-	* hit enter
-	* Select the ssh configuration file to update:
-		* ex. “/Users/username/.ssh/config”
-* Now any time you select connect to host or click the greater than less than symbol in the bottom right corner and select connect to host, then select the IP address for the server to connect to and it will connect directly.
+* Follow [ssh configuration setup](https://github.com/brandontkessler/notes/blob/master/code/bash/ssh.md)
+* Add [Remote - SSH extension](https://medium.com/@christyjacob4/using-vscode-remotely-on-an-ec2-instance-7822c4032cff)
+* Then connect to server using one of the Hosts created in the `~/.ssh/config` file.
 
 ## Connect to Database
 
