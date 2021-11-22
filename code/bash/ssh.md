@@ -49,7 +49,21 @@ Now access can be made to the remote server using the private-public key pairing
 
 ## Formatting config file
 
-`nano ~/.ssh/config`
+Build config file with: `touch ~/.ssh/config` and to make it readable/writeable only by the user add `chmod 600 ~/.ssh/config`.
+
+
+The basic structure of the config file should like this: 
+
+```bash
+Host dev
+    HostName dev.example.com
+    User john
+    Port 2322
+```
+
+Then running the command `ssh dev` will access the dev host with provided parameters. Other arguments for the config file can be viewed with `man ssh_config`.
+
+Any number of hosts can be set up this way.
 
 ### Proxy Jumping Multiple Servers
 
@@ -101,4 +115,4 @@ Host ec2
 ## Other Concepts
 
 * [Agent Forwarding](https://docs.github.com/en/developers/overview/using-ssh-agent-forwarding): Allows use of local SSH keys instead of leaving keys - without passphrases - sitting on your server.
-* 
+
