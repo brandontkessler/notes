@@ -6,16 +6,50 @@
 
 ## Generating keys
 
-## Other Concepts
+#### 1. Generate keys
 
-* [Agent Forwarding](https://docs.github.com/en/developers/overview/using-ssh-agent-forwarding): Allows use of local SSH keys instead of leaving keys - without passphrases - sitting on your server.
-* 
+```bash
+> ssh-keygen -t rsa
+```
+
+* The default file name and path is `~/.ssh/id_rsa` and corresponding public key `~/.ssh/id_rsa.pub`
+
+#### 2. Copy public key to remote server
+
+Use scp or rsync
+
+```bash
+> scp ~/.ssh/id_rsa.pub user@hostname:
+```
+
+Anything after the colon above is path but in this case we can leave it in root.
+
+#### 3. Log in to remote server using username and password
+
+#### 4. Create .ssh folder and authorized_keys file if none exists
+
+```bash
+> mkdir -p ~/.ssh && chmod 700 ~/.ssh && touch ~/.ssh/authorized_keys
+```
+
+#### 5. Add contents from public key to new line on authorized_keys file
+
+```bash
+> cat ~/id_rsa.pub >> ~/.ssh/authorized_keys
+```
+
+#### 6. Delete the public key
+
+```bash
+> rm ~/id_rsa.pub
+```
+
+Now access can be made to the remote server using the private-public key pairing.
 
 
 ## Formatting config file
 
 `nano ~/.ssh/config`
-
 
 ### Proxy Jumping Multiple Servers
 
@@ -64,10 +98,7 @@ Host ec2
 ```
 
 
-## Formatting authorized_keys file
+## Other Concepts
 
-`nano ~/.ssh/authorized_keys`
-
-
-
-
+* [Agent Forwarding](https://docs.github.com/en/developers/overview/using-ssh-agent-forwarding): Allows use of local SSH keys instead of leaving keys - without passphrases - sitting on your server.
+* 
