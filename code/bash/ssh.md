@@ -111,8 +111,33 @@ Host ec2
         RemoteCommand ssh mta1
 ```
 
+## [Password Management](https://www.freecodecamp.org/news/how-to-manage-multiple-ssh-keys/)
+
+To avoid having to provide a password every time SSH connection is initiating, we can add it to MacOS keychain.
+
+```bash
+ssh-add -K ~/.ssh/id_rsa_whatever
+```
+
+You can remove keys from ssh-agent with (this also happens when your computer restarts):
+
+```
+ssh-add -D
+```
+
+This will then require you to enter a password again even though the `ssh-add -K` is still in the keychain.
+
+Bypass this by updating the config file:
+
+```bash
+# ~/.ssh/config
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+```
+
+Now, SSH will look for key in keychain and if it finds it you will not be prompted for password. Key will also be added to ssh-agent.
 
 ## Other Concepts
 
 * [Agent Forwarding](https://docs.github.com/en/developers/overview/using-ssh-agent-forwarding): Allows use of local SSH keys instead of leaving keys - without passphrases - sitting on your server.
-
