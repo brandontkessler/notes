@@ -10,7 +10,7 @@ Use the PYTHONPATH environment variable and set it equal to the path to your pac
 * Variable name is equal to ‘PYTHONPATH’ and variable value is equal to path of packages, for example:
 	* ‘C:\Users\username\Desktop\example\pkgs’
 
-#### Linus/Mac
+#### Linux/Mac
 Update .bashrc file or . bash_profile to add the path
 * `$ nano ~/.bashrc` or `$ nano ~/.bash_profile`
 * Then anywhere write: `export PYTHONPATH=‘/mnt/c/Users/username/Desktop/example/pkgs’`
