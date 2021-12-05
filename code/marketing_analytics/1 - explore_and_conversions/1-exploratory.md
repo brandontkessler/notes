@@ -6,6 +6,9 @@
 df.head()
 df.describe()
 df.info()
+
+# Print top five of a column
+print(df['column'].value_counts().head())
 ```
 
 ## datatypes
