@@ -4,7 +4,11 @@
 
 * Finish boxsdk
 * aws sdk
+  * s3 
+  * 
 * google sdk
+  * bigquery
+  * 
 * Add other notes from trello
 * Add algorithms to data structures
 * Finish oop notes
