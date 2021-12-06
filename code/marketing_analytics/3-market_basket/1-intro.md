@@ -44,9 +44,11 @@ print(rules)
 
 **Support**: measures the share of transactions that contain an itemset.
 
-$$
+<!-- $$
 support = \dfrac{number of transactions with items}{number of transactions}
-$$
+$$ --> 
+
+<div align="center"><img style="background: white;" src="https://render.githubusercontent.com/render/math?math=support%20%3D%20%5Cdfrac%7Bnumber%20of%20transactions%20with%20items%7D%7Bnumber%20of%20transactions%7D"></div>
 
 Ex. In ten transactions, humor appears in 2 of them. Therefore, humor has a support of 0.2.
 
