@@ -44,9 +44,9 @@ print(rules)
 
 **Support**: measures the share of transactions that contain an itemset.
 
-```math
+$$
 support = \dfrac{number of transactions with items}{number of transactions}
-```
+$$
 
 Ex. In ten transactions, humor appears in 2 of them. Therefore, humor has a support of 0.2.
 
