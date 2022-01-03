@@ -32,3 +32,31 @@ func main() {
 	fmt.Println(sum)
 }
 ```
+
+## Range
+
+Used to iterate over a slice or map
+
+```go
+package main
+
+import "fmt"
+
+var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+
+func main() {
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+
+	// skips the index
+	for _, v := range pow {
+		fmt.Printf("%d", v)
+	}
+
+	// only uses the index
+	for i := range pow {
+		fmt.Printf("%d", i)
+	}
+}
+```
