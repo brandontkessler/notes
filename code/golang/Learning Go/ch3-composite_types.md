@@ -79,3 +79,99 @@ var s3 string = s[:5]   // "Hello"
 ```
 
 Due to type conversions issues between strings, bytes, and runes, use functions from the `strings` package to get substrings from strings.
+
+# maps
+
+```go
+teams := map[string][]string
+{
+    "Orcas": []string{"Fred", "Ralph", "Bijou"},
+    "Lions": []string{"Sarah", "Peter", "Billie"}
+}
+
+// use `make` to create a map with a default size:
+ages := make(map[int][]string, 10)
+
+
+
+totalWins := map[string]int{}
+totalWins["Orcas"] = 1
+totalWins["Lions"] = 2
+totalWins["Kittens"]++
+
+fmt.Println(totalWins["Orcas"])     // 1
+fmt.Println(totalWins["Lions"])     // 2
+ftm.Println(totalWins["Kittens"])   // 1
+
+
+// comma ok idiom returns bool
+v, ok := totalWins["Lions"] // ok returns true
+v, ok := totalWins["Dogs"]  // ok returns fals
+
+// Use delete function to delete key from map
+m := map[string]int{
+    "hello": 4,
+    "world": 6
+}
+delete(m, "hello")
+```
+
+# structs
+
+Maps are convenient for storing data but don't define an API since there's no way to constrain a map to only allow certain keys. All values of a map must also be of the same type. This makes maps not the ideal way to pass data from function to function. Use structs instead.
+
+```go
+type person struct {
+    name    string
+    age     int
+    pet     string
+}
+
+var fred person
+bob := person{}
+
+julia := person{
+    "Julia",
+    40,
+    "cat",
+}
+
+beth := person{
+    age: 30,
+    name: "Beth",
+}
+
+bob.name = "Bob"
+
+fmt.Println(beth.name)
+```
+
+## anonymous structs
+
+You can also declare a variable implements a struct type without first iving the struct type a name.
+
+```go
+var person struct {
+    name    string
+    age     int
+    pet     string
+}
+
+person.name = "bob"
+person.age = 50
+
+pet := struct {
+    name    string
+    kind    string
+}{
+    name: "Fido",
+    kind: "dog",
+}
+```
+
+When is this useful?
+
+1. translating external data into a struct or a struct into external data (JSON) - This is called *marshaling* and *unmarshaling* data.
+2. Writing tests
+
+
