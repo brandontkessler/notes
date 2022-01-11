@@ -51,3 +51,12 @@
    3. Errors are Values
    4. Wrapping Errors
    5. Panic and Recover
+9. Modules, Packages and Imports
+   1. Naming Packages
+   2. Module Organization
+   3. Overriding Package Names
+   4. Package Comments and `godoc`
+   5. Internal Package
+   6. Using Aliases
+   7. Versioning
+10. Concurrency
