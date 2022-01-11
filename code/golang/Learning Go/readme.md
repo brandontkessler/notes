@@ -45,4 +45,9 @@
    8. Function Types are a Bridge to Interfaces
    9. Dependency Injection
    10. Wire
-8.  Errors
+8. Errors
+   1. Examples
+   2. Use Strings for Simple Errors
+   3. Errors are Values
+   4. Wrapping Errors
+   5. Panic and Recover
