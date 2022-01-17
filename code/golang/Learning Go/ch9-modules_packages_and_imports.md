@@ -84,6 +84,7 @@ func Convert(from Money, to string) (Money, error) {
 To see godoc for a package, in command line use:
 
 ```bash
+$ # go install -v golang.org/x/tools/cmd/godoc@latest
 $ go doc PACKAGE_NAME.IDENTIFIER_NAME
 ```
 

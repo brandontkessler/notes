@@ -72,3 +72,21 @@
    10. Turning off a Case in a select
    11. Using WaitGroups
    12. Putting Concurrent Tools Together
+11. Standard Library
+    1. io
+    2. time
+    3. json
+       1. Encoding and Decoding JSON Streams
+    4. net/http
+12. skipped
+13. Writing Tests
+    1. Example
+    2. Reporting Test Failures
+    3. Setting Up and Tearing Down
+    4. Storing Sample Test Data
+    5. Test Packages
+    6. Use go-cmp to Compare Test Results
+    7. Table Tests
+    8. Checking Code Coverage
+    9. Benchmarks
+    10. Stubs
