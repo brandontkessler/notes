@@ -175,7 +175,7 @@ When you have multiple JSON structs to read or write at once, use `json.Decoder`
 {"name": "Pat", "age": 30}
 ```
 
-Assume it's stored ina string called data but this could be from a file or from a get request. Store this data into our `t` variable, one JSON object a time. Like before, initialize our `json.Decoder` with the data source but use the `More` method on `json.Decoder` as a for loop condition.
+Assume it's stored in a string called data but this could be from a file or from a get request. Store this data into our `t` variable, one JSON object a time. Like before, initialize our `json.Decoder` with the data source but use the `More` method on `json.Decoder` as a for loop condition.
 
 ```go
 dec := json.NewDecoder(strings.NewReader(data))
